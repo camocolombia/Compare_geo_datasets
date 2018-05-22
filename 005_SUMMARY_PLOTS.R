@@ -9,7 +9,7 @@ out_dir_outcome <- paste0(out_dir,"/","OUTCOME"); if(!file.exists(out_dir_outcom
 file_ready <- read.csv(paste0(out_dir_outcome,"/","COORDS_FINAL",".csv"),sep="|",header=TRUE)
 
 
-file2 <- read.csv(paste0(out_dir_plot,"/","FILE_ISO2_1.csv"),sep="|")
+file2 <- read.csv(paste0(out_dir,"/","FILE_ISO2_1.csv"),sep="|")
 s2 <- seq(0,100,by=10);s <- s2
 
 
@@ -147,7 +147,7 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
                   decreasing = T),]
  
  # THR <- THR[which(!is.na(THR$value)),]
- 
+tapply(TRAFFIC$value,TRAFFIC$value,length)
  
  TRAFFIC_PLOT <-  ggplot(TRAFFIC, aes(value))+
    #ggplot(data=file3la re_DATA,
@@ -168,4 +168,70 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
  #scale_colour_discrete(c("red","yellow","green"))
  
  ggsave(paste0(out_dir_outcome,"/","TRAFFIC_PLOT",".pdf"),TRAFFIC_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ 
+ 
+ ##################
+ 
+ #SUG_COORDS
+ 
+ SUG_coords <- as.data.frame(cbind(file_ready$ACID,as.character(file_ready$SCOORD.y)))
+ colnames(SUG_coords) <- c("Accession id","value")
+ SUG_coords <- SUG_coords[which(SUG_coords$value!=""),]
+ SUG_coords$value <- factor(SUG_coords$value, levels = c(
+   "NO COORD",
+   "NO LOCALITY",
+   "SOS",
+   "CENTROID",
+   "UPLOADED IN GRIN GLOBAL",
+   "GRIN 2007", 
+   "GRIN 2017",
+   "IRRI IMP Data",
+   "IRRI FINAL COORDS",
+   "GRIN 2007 OR GRIN 2017",
+   "GRIN 2007 OR IRRI IMP Data",
+   "GRIN 2017 OR IRRI IMP Data",
+   "GRIN 2007/GRIN 2017/IRRI IMP Data",
+   "GEOREF BY HAND"
+   ))
+ SUG_coords <- SUG_coords[order(
+   SUG_coords$value==  "NO COORD",
+   SUG_coords$value==    "NO LOCALITY",
+   SUG_coords$value==    "SOS",
+   SUG_coords$value==    "CENTROID",
+   SUG_coords$value==    "UPLOADED IN GRIN GLOBAL",
+   SUG_coords$value==    "GRIN 2007", 
+   SUG_coords$value==    "GRIN 2017",
+   SUG_coords$value==    "IRRI IMP Data",
+   SUG_coords$value==    "IRRI FINAL COORDS",
+   SUG_coords$value==    "GRIN 2007 OR GRIN 2017",
+   SUG_coords$value==    "GRIN 2007 OR IRRI IMP Data",
+   SUG_coords$value==    "GRIN 2017 OR IRRI IMP Data",
+   SUG_coords$value==    "GRIN 2007/GRIN 2017/IRRI IMP Data",
+   SUG_coords$value==    "GEOREF BY HAND",
+   
+                  decreasing = T),]
+ 
+ 
+ 
+
+ SUG_coords_PLOT <-  ggplot(SUG_coords, aes(value))+
+   #ggplot(data=file3la re_DATA,
+   #                       aes(x=value,y=value,fill=value)) +
+   #  geom_bar(stat="identity") +
+   geom_bar(aes(fill = value))+
+   guides(fill=FALSE)+
+   ylab("Number of occurrences")+ xlab("Coordinate status")+
+  # ggtitle("Coordinate status")+
+   #scale_fill_manual(name="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
+   #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
+   
+  # scale_fill_manual("legend", values = c("purple","red","yellow","green","blue"))+
+   theme(panel.background = element_rect(fill = "gray95"),
+         text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
+         axis.text.y  = element_text(size=49,colour="black"),
+         legend.title=element_blank())
+ #scale_colour_discrete(c("red","yellow","green"))
+ 
+ ggsave(paste0(out_dir_outcome,"/","SUG_PLOT",".pdf"),SUG_coords_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ 
  

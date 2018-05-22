@@ -3,21 +3,21 @@ options(java.home="C:\\Program Files\\Java\\jre1.8.0_141")
 require(xlsx);require(rJava)
 
 file_to_fix <- read.csv("E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/COORDS.csv",sep="|",header=TRUE)
-out_dir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/"; if(!file.exists(out_dir)){dir.create(out_dir)}  
+out_dir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV"; if(!file.exists(out_dir)){dir.create(out_dir)}  
 
 ####THRESHOLD TL####
 
-THR <- read.csv(paste0(out_dir,"/","THRESHOLD","/","THR_METRICS_2.csv"),sep="|",header=TRUE)
+THR <- read.csv(paste0(out_dir,"/","THR_METRICS_2.csv"),sep="|",header=TRUE)
 
   ####ISO_2####
 
-ISO <- read.csv(paste0(out_dir,"/","ISO2","/","FILE_ISO2_1.csv"),sep="|",header=TRUE)
+ISO <- read.csv(paste0(out_dir,"/","FILE_ISO2_1.csv"),sep="|",header=TRUE)
 
 
 ####UNCERTAINTIES####
-UNC_MIN <- read.csv(paste0(out_dir,"/","UNCERTAINTY","/","UNCERTAINTIES_MIN.csv"),sep="|",header=TRUE)
+UNC_MIN <- read.csv(paste0(out_dir,"/","UNCERTAINTIES_MIN.csv"),sep="|",header=TRUE)
 
-UNC_MAX <- read.csv(paste0(out_dir,"/","UNCERTAINTY","/","UNCERTAINTIES_MAX.csv"),sep="|",header=TRUE)
+UNC_MAX <- read.csv(paste0(out_dir,"/","UNCERTAINTIES_MAX.csv"),sep="|",header=TRUE)
 
 ####################
 
@@ -151,3 +151,4 @@ write.table(final_out,paste0(out_dir_outcome,"/","COORDS_FINAL",".csv"),sep="|",
 #write.xlsx2(final_out,paste0(out_dir,"/","OUTCOME","/","COORDS_FINAL",".xlsx"),row.names=F,showNA = F);gc()
 
 write.table(AC_ID,paste0(out_dir_outcome,"/","COORDS_FINAL_IDs",".csv"),sep="|",row.names=F,na="");gc()
+

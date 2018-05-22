@@ -3,6 +3,8 @@ library("ggplot2")
 
 dir_analysis   <-   "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/TRAFFIC_LIGHT"; if(!file.exists(dir_analysis)){dir.create(dir_analysis)}
 out_dir   <-   "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/PLOT"; if(!file.exists(out_dir)){dir.create(out_dir)}
+out_dir_plot  <- paste0(out_dir,"/","THR_PLOTS");if(!file.exists(out_dir_plot)){dir.create(out_dir_plot)}
+
 #s  <-  seq(from = 10, to = 2000, by = 10)
 s   <-   seq(from = 0, to = 100, by = 10)
 s2   <-   seq(from = 0, to = 100, by = 10)
@@ -116,7 +118,7 @@ theme(panel.background = element_rect(fill = "gray95"),
       legend.title=element_blank())+
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
-ggsave(paste0(out_dir,"/","THR_ACC_RAW_PLOT",".pdf"),THR_ACC_RAW_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","THR_ACC_RAW_PLOT",".pdf"),THR_ACC_RAW_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 THR_ACC_RDGI_DATA  <-   melt(THR_ACC_RDGI, id="THRESHOLD")  # convert to long format
@@ -135,7 +137,7 @@ THR_ACC_RDGI_PLOT  <-  ggplot(data=THR_ACC_RDGI_DATA,
         legend.title=element_blank())+
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
-ggsave(paste0(out_dir,"/","THR_ACC_RDGI_PLOT",".pdf"),THR_ACC_RDGI_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","THR_ACC_RDGI_PLOT",".pdf"),THR_ACC_RDGI_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 THR_ACC_IR_DATA  <-   melt(THR_ACC_IR, id="THRESHOLD")  # convert to long format
@@ -154,7 +156,7 @@ THR_ACC_IR_PLOT  <-  ggplot(data=THR_ACC_IR_DATA,
         legend.title=element_blank())+
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
-ggsave(paste0(out_dir,"/","THR_ACC_IR_PLOT",".pdf"),THR_ACC_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","THR_ACC_IR_PLOT",".pdf"),THR_ACC_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 
 ######################################################################################
@@ -174,7 +176,7 @@ THR_RAW_RDGI_DATA_PLOT  <-  ggplot(data=THR_RAW_RDGI_DATA,
         legend.title=element_blank())+
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
-ggsave(paste0(out_dir,"/","THR_RAW_RDGI_DATA_PLOT",".pdf"),THR_RAW_RDGI_DATA_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","THR_RAW_RDGI_DATA_PLOT",".pdf"),THR_RAW_RDGI_DATA_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 THR_RAW_IR_DATA  <-   melt(THR_RAW_IR, id="THRESHOLD")  # convert to long format
@@ -193,7 +195,7 @@ THR_RAW_IR_PLOT  <-  ggplot(data=THR_RAW_IR_DATA,
         legend.title=element_blank())+
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
-ggsave(paste0(out_dir,"/","THR_RAW_IR_PLOT",".pdf"),THR_RAW_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","THR_RAW_IR_PLOT",".pdf"),THR_RAW_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 THR_RDGI_IR_DATA  <-   melt(THR_RDGI_IR, id="THRESHOLD")  # convert to long format
@@ -212,7 +214,7 @@ THR_RDGI_IR_PLOT  <-  ggplot(data=THR_RDGI_IR_DATA,
         legend.title=element_blank())+
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
-ggsave(paste0(out_dir,"/","THR_RDGI_IR_PLOT",".pdf"),THR_RDGI_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","THR_RDGI_IR_PLOT",".pdf"),THR_RDGI_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 ######################################################################################
@@ -280,7 +282,7 @@ TOTAL_PLOT  <-  ggplot(data=TOTAL, aes(x=THRESHOLD,y=THR_ACC_RAW,group=variable,
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
   
-ggsave(paste0(out_dir,"/","TOTAL_PLOT",".pdf"),TOTAL_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","TOTAL_PLOT",".pdf"),TOTAL_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 
 
@@ -300,7 +302,7 @@ THR_RDGI_IR_PLOT  <-  ggplot(data=THR_RDGI_IR_DATA,
         legend.title=element_blank())+
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)
 
-ggsave(paste0(out_dir,"/","THR_RDGI_IR_PLOT",".pdf"),THR_RDGI_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","THR_RDGI_IR_PLOT",".pdf"),THR_RDGI_IR_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 ######################################################################################
@@ -355,7 +357,7 @@ RAW_RDGI_TH_PLOT_2  <-  ggplot(data=RAW_RDGI_TH_2_DATA,
     scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)+
     scale_y_continuous(limits = c(0,60),breaks=c(seq(0,60,by=5)))
 
-ggsave(paste0(out_dir,"/","RAW_RDGI_TH_PLOT_PER",".pdf"),RAW_RDGI_TH_PLOT_2,dpi=600,width =120,height=50,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","RAW_RDGI_TH_PLOT_PER",".pdf"),RAW_RDGI_TH_PLOT_2,dpi=600,width =120,height=50,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 RAW_IR_TH_2_DATA   <-   melt(RAW_IR_TH_2, id="THRESHOLD")  # convert to long format
@@ -376,7 +378,7 @@ RAW_IR_TH_PLOT_2  <-  ggplot(data=RAW_IR_TH_2_DATA,
   scale_x_continuous(limits = c(s[[1]], s[[length(s)]]),breaks=s2)+
 scale_y_continuous(limits = c(0,60),breaks=c(seq(0,60,by=5)))
 
-ggsave(paste0(out_dir,"/","RAW_IR_TH_PLOT_PER",".pdf"),RAW_IR_TH_PLOT_2,dpi=600,width =120,height=50,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","RAW_IR_TH_PLOT_PER",".pdf"),RAW_IR_TH_PLOT_2,dpi=600,width =120,height=50,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ######################################################################################
 
@@ -399,11 +401,11 @@ scale_y_continuous(limits = c(0,60),breaks=c(seq(0,60,by=5)))
 
 cat("DONE!","/n")
 
-ggsave(paste0(out_dir,"/","RDGI_IR_TH_PLOT_PER",".pdf"),RDGI_IR_TH_PLOT_2,dpi=600,width =120,height=50,units = "cm",scale=1.2,limitsize = FALSE)
+ggsave(paste0(out_dir_plot,"/","RDGI_IR_TH_PLOT_PER",".pdf"),RDGI_IR_TH_PLOT_2,dpi=600,width =120,height=50,units = "cm",scale=1.2,limitsize = FALSE)
 gc()
 ##################################################################################################
 TOTAL_2  <-  cbind(RAW_RDGI_TH_2_DATA,RAW_IR_TH_2_DATA[,3],RDGI_IR_TH_2_DATA[,3])
 colnames(TOTAL_2)  <-  c("THRESHOLD","variable","RAW_RDGI","RAW_IRRI","RDGI_IRRI")
-write.table(TOTAL_2,paste0(out_dir,"/","SUMMARY_PER.csv"),row.names = F,quote = F,sep="|")
+write.table(TOTAL_2,paste0(out_dir_plot,"/","SUMMARY_PER.csv"),row.names = F,quote = F,sep="|")
 gc()
 

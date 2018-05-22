@@ -88,7 +88,7 @@ for(i in 1:nrow(file_to_fix)){
     SCOORD[[i]] <- "SOS"
   } else  if(file_to_fix$IRRI_BYHAND_FLAG[[i]]==1){
     S1[[i]] <- "GREEN"
-    SCOORD[[i]] <- "GEOREF_BY_HAND"
+    SCOORD[[i]] <- "GEOREF BY HAND"
   } else  if(file_to_fix$LOCALITY_FLAG[[i]]==1){
     S1[[i]] <- "RED"
     SCOORD[[i]] <- "NO LOCALITY"
@@ -141,57 +141,57 @@ for(i in 1:nrow(file_to_fix)){
       if(xx2$DATASET[1]=="ACCESS_distance_georef" &
          xx2$UNCERTAINTY[[1]]<=10){
         S1[[i]] <- "GREEN"
-        SCOORD[[i]] <- "ACCESS" 
+        SCOORD[[i]] <- "GRIN 2007" 
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" &
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
         S1[[i]] <- "YELLOW"
-        SCOORD[[i]] <- "ACCESS" 
+        SCOORD[[i]] <- "GRIN 2007" 
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" &
                xx2$UNCERTAINTY[[1]]>50){
         S1[[i]] <- "RED"
-        SCOORD[[i]] <- "ACCESS" 
+        SCOORD[[i]] <- "GRIN 2007" 
       }
       ####
       if(xx2$DATASET[1]=="GRIN_distance_georef" &
          xx2$UNCERTAINTY[[1]]<=10){
         S1[[i]] <- "GREEN"
-        SCOORD[[i]] <- "GRIN" 
+        SCOORD[[i]] <- "GRIN 2017" 
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" &
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
         S1[[i]] <- "YELLOW"
-        SCOORD[[i]] <- "GRIN" 
+        SCOORD[[i]] <- "GRIN 2017" 
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" &
                xx2$UNCERTAINTY[[1]]>50){
         S1[[i]] <- "RED"
-        SCOORD[[i]] <- "GRIN" 
+        SCOORD[[i]] <- "GRIN 2017" 
       }
       ####
       if(xx2$DATASET[1]=="GEO_IMPROVED_distance_georef" &
          xx2$UNCERTAINTY[[1]]<=10){
         S1[[i]] <- "GREEN"
-        SCOORD[[i]] <- "GEO" 
+        SCOORD[[i]] <- "IRRI IMP Data" 
       } else  if(xx2$DATASET[1]=="GEO_IMPROVED_distance_georef" &
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
         S1[[i]] <- "YELLOW"
-        SCOORD[[i]] <- "GEO" 
+        SCOORD[[i]] <- "IRRI IMP Data" 
       } else  if(xx2$DATASET[1]=="GEO_IMPROVED_distance_georef" &
                xx2$UNCERTAINTY[[1]]>50){
         S1[[i]] <- "RED"
-        SCOORD[[i]] <- "GEO" 
+        SCOORD[[i]] <- "IRRI IMP Data" 
       }
       ####
       if(xx2$DATASET[1]=="HIJMANS_distance_georef" &
          xx2$UNCERTAINTY[[1]]<=10){
         S1[[i]] <- "GREEN"
-        SCOORD[[i]] <- "HIJMANS" 
+        SCOORD[[i]] <- "IRRI FINAL COORDS" 
       } else  if(xx2$DATASET[1]=="HIJMANS_distance_georef" &
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
         S1[[i]] <- "YELLOW"
-        SCOORD[[i]] <- "HIJMANS" 
+        SCOORD[[i]] <- "IRRI FINAL COORDS" 
       } else  if(xx2$DATASET[1]=="HIJMANS_distance_georef" &
                xx2$UNCERTAINTY[[1]]>50){
         S1[[i]] <- "RED"
-        SCOORD[[i]] <- "HIJMANS" 
+        SCOORD[[i]] <- "IRRI FINAL COORDS" 
       }
       #################################################  
     } else  if(nrow(xx2)==2){
@@ -200,96 +200,96 @@ for(i in 1:nrow(file_to_fix)){
       if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
          xx2$DATASET[2]=="GRIN_distance_georef"&  
          xx2$UNCERTAINTY[[1]]<=10){
-        SCOORD[[i]] <- "ACCESS OR GRIN"
+        SCOORD[[i]] <- "GRIN 2007 OR GRIN 2017"
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef"&  
                xx2$UNCERTAINTY[[1]]<=10){
-        SCOORD[[i]] <- "ACCESS OR GEO IMPROVED"
+        SCOORD[[i]] <- "GRIN 2007 OR IRRI IMP Data"
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]<=10){
-        SCOORD[[i]] <- "ACCESS"
+        SCOORD[[i]] <- "GRIN 2007"
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef"&  
                xx2$UNCERTAINTY[[1]]<=10){
-        SCOORD[[i]] <- "GRIN OR GEO IMPROVED"
+        SCOORD[[i]] <- "GRIN 2017 OR IRRI IMP Data"
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]<=10){
-        SCOORD[[i]] <- "GRIN"
+        SCOORD[[i]] <- "GRIN 2017"
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="GEO_IMPROVED_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]<=10){
-        SCOORD[[i]] <- "GEO"
+        SCOORD[[i]] <- "IRRI IMP Data"
         S1[[i]] <- "GREEN"
       }
       ######## >10 Km & 50 Km
       if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
          xx2$DATASET[2]=="GRIN_distance_georef"&  
          xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
-        SCOORD[[i]] <- "ACCESS OR GRIN"
+        SCOORD[[i]] <- "GRIN 2007 OR GRIN 2017"
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
-        SCOORD[[i]] <- "ACCESS OR GEO IMPROVED"
+        SCOORD[[i]] <- "GRIN 2007 OR IRRI IMP Data"
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
-        SCOORD[[i]] <- "ACCESS"
+        SCOORD[[i]] <- "GRIN 2007"
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
-        SCOORD[[i]] <- "GRIN OR GEO IMPROVED"
+        SCOORD[[i]] <- "GRIN 2017 OR IRRI IMP Data"
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
-        SCOORD[[i]] <- "GRIN"
+        SCOORD[[i]] <- "GRIN 2017"
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="GEO_IMPROVED_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
-        SCOORD[[i]] <- "GEO"
+        SCOORD[[i]] <- "IRRI IMP Data"
         S1[[i]] <- "YELLOW"
       }
       ######## >50 Km
       if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
          xx2$DATASET[2]=="GRIN_distance_georef"&  
          xx2$UNCERTAINTY[[1]]>50){
-        SCOORD[[i]] <- "ACCESS OR GRIN"
+        SCOORD[[i]] <- "GRIN 2007 OR GRIN 2017"
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>50){
-        SCOORD[[i]] <- "ACCESS OR GEO IMPROVED"
+        SCOORD[[i]] <- "GRIN 2007 OR IRRI IMP Data"
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>50){
-        SCOORD[[i]] <- "ACCESS"
+        SCOORD[[i]] <- "GRIN 2007"
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>50){
-        SCOORD[[i]] <- "GRIN OR GEO IMPROVED"
+        SCOORD[[i]] <- "GRIN 2017 OR IRRI IMP Data"
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>50){
-        SCOORD[[i]] <- "GRIN"
+        SCOORD[[i]] <- "GRIN 2017"
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="GEO_IMPROVED_distance_georef" & 
                xx2$DATASET[2]=="HIJMANS_distance_georef"&  
                xx2$UNCERTAINTY[[1]]>50){
-        SCOORD[[i]] <- "GEO"
+        SCOORD[[i]] <- "IRRI IMP Data"
         S1[[i]] <- "RED"
       }
       
@@ -303,7 +303,7 @@ for(i in 1:nrow(file_to_fix)){
          xx2$DATASET[3]=="GEO_IMPROVED_distance_georef" &  
          xx2$UNCERTAINTY[[1]]<=10
       ){
-        SCOORD[[i]] <- "ACCESS/GRIN/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2007/GRIN 2017/IRRI IMP Data"  
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GRIN_distance_georef" &
@@ -311,7 +311,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]<=10
       ){
         
-        SCOORD[[i]] <- "ACCESS/GRIN"  
+        SCOORD[[i]] <- "GRIN 2007/GRIN 2017"  
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef" &
@@ -319,7 +319,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]<=10
       ){
         
-        SCOORD[[i]] <- "ACCESS/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2007/IRRI IMP Data"
         S1[[i]] <- "GREEN"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef" &
@@ -327,7 +327,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]<=10
       ){
         
-        SCOORD[[i]] <- "GRIN/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2017 /IRRI IMP Data"  
         S1[[i]] <- "GREEN"
       }
       
@@ -337,7 +337,7 @@ for(i in 1:nrow(file_to_fix)){
          xx2$DATASET[3]=="GEO_IMPROVED_distance_georef" &  
          xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50
       ){
-        SCOORD[[i]] <- "ACCESS/GRIN/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2007/GRIN 2017/IRRI IMP Data"  
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GRIN_distance_georef" &
@@ -345,7 +345,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50
       ){
         
-        SCOORD[[i]] <- "ACCESS/GRIN"  
+        SCOORD[[i]] <- "GRIN 2007/GRIN 2017"  
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef" &
@@ -353,7 +353,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50
       ){
         
-        SCOORD[[i]] <- "ACCESS/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2007/IRRI IMP Data"
         S1[[i]] <- "YELLOW"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef" &
@@ -361,7 +361,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50
       ){
         
-        SCOORD[[i]] <- "GRIN/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2017 /IRRI IMP Data"  
         S1[[i]] <- "YELLOW"
       }
       ########>50 KM     
@@ -370,7 +370,7 @@ for(i in 1:nrow(file_to_fix)){
          xx2$DATASET[3]=="GEO_IMPROVED_distance_georef" &  
          xx2$UNCERTAINTY[[1]]>50
       ){
-        SCOORD[[i]] <- "ACCESS/GRIN/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2007/GRIN 2017/IRRI IMP Data"  
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GRIN_distance_georef" &
@@ -378,7 +378,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]>50
       ){
         
-        SCOORD[[i]] <- "ACCESS/GRIN"  
+        SCOORD[[i]] <- "GRIN 2007/GRIN 2017"  
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="ACCESS_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef" &
@@ -386,7 +386,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]>50
       ){
         
-        SCOORD[[i]] <- "ACCESS/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2007/IRRI IMP Data"
         S1[[i]] <- "RED"
       } else  if(xx2$DATASET[1]=="GRIN_distance_georef" & 
                xx2$DATASET[2]=="GEO_IMPROVED_distance_georef" &
@@ -394,7 +394,7 @@ for(i in 1:nrow(file_to_fix)){
                xx2$UNCERTAINTY[[1]]>50 
       ){
         
-        SCOORD[[i]] <- "GRIN/GEO IMPROVED"  
+        SCOORD[[i]] <- "GRIN 2017 /IRRI IMP Data"  
         S1[[i]] <- "RED"
       }
       
@@ -405,20 +405,20 @@ for(i in 1:nrow(file_to_fix)){
     } else   if(nrow(xx2)== 4&  
               xx2$UNCERTAINTY[[1]]<=10){
       
-      SCOORD[[i]] <- "ACCESS/GRIN/GEO IMPROVED"  
+      SCOORD[[i]] <- "GRIN 2007/GRIN 2017/IRRI IMP Data"  
       S1[[i]] <- "GREEN"
       
       ######## 10 & 50  KM
     } else   if(nrow(xx2)== 4 &  
               xx2$UNCERTAINTY[[1]]>10 & xx2$UNCERTAINTY[[1]]<=50){
       
-      SCOORD[[i]] <- "ACCESS/GRIN/GEO IMPROVED"  
+      SCOORD[[i]] <- "GRIN 2007/GRIN 2017/IRRI IMP Data"  
       S1[[i]] <- "YELLOW"
       ######## 50  KM
     } else   if(nrow(xx2)== 4 &  
               xx2$UNCERTAINTY[[1]]>50){
       
-      SCOORD[[i]] <- "ACCESS/GRIN/GEO IMPROVED"  
+      SCOORD[[i]] <- "GRIN 2007/GRIN 2017/IRRI IMP Data"  
       S1[[i]] <- "RED"
     }
   }

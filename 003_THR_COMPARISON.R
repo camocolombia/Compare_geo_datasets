@@ -1,4 +1,5 @@
 dir_analysis <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/TRAFFIC_LIGHT"
+inDir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV"
 out_dir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/PLOT"; if(!file.exists(out_dir)){dir.create(out_dir)}
 out_dir_TH <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/THRESHOLD"; if(!file.exists(out_dir_TH)){dir.create(out_dir_TH)}
 file_to_fix <- read.csv("E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/COORDS.csv",sep="|",header=TRUE)
@@ -46,7 +47,7 @@ DATASET_AVAILABLE$DATASET_AVAILABLE <- NA
         
         DATASET_AVAILABLE$DATASET_AVAILABLE[[i]] <- 40 ###NO LOCALITY (CENTROID)
         
-      } else  if(file_to_fix$GG_COORDS_FLAG[[i]]==1 & #georefremarks_flag
+      } else  if(file_to_fix$IRRI_BYHAND_FLAG[[i]]==1 & #georefremarks_flag
                file_to_fix$SOS_FLAG[[i]]==0    #SOS_FLAG
       ){
         
@@ -354,5 +355,5 @@ THR_METRICS$COORD_STATUS[which(THR_METRICS$COORD_STATUS==20)] <- "GEOREF BY HAND
 THR_METRICS$COORD_STATUS[which(THR_METRICS$COORD_STATUS==30)] <- "GRIN GLOBAL"
 THR_METRICS$COORD_STATUS[which(THR_METRICS$COORD_STATUS==40)] <- "NO LOCALITY (CENTROID)"
 
-write.table(THR_METRICS,paste0(out_dir_TH,"/","THR_METRICS_2.csv"),row.names = F,sep="|")
+write.table(THR_METRICS,paste0(inDir,"/","THR_METRICS_2.csv"),row.names = F,sep="|")
   

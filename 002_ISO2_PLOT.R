@@ -3,8 +3,8 @@ library("ggplot2")
 
 #file_to_fix <- read.csv("E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/COORDS.csv",sep="|",header=TRUE)
 out_dir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/PLOT"; if(!file.exists(out_dir)){dir.create(out_dir)}
-
-file2 <- read.csv(paste0(out_dir,"/","FILE_ISO2_1.csv"),sep="|")
+inDir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV"
+file2 <- read.csv(paste0(inDir,"/","FILE_ISO2_1.csv"),sep="|")
 s2 <- seq(0,100,by=10);s <- s2
 
 file3 <- file2[,c(2,4:8)]
