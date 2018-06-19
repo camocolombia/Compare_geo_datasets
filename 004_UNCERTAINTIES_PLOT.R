@@ -14,27 +14,31 @@ f2 <- cbind(file_to_fix$ACID,
           as.numeric(as.character(file_to_fix$HIJMANS_distance_georef))
           )
 f2[,2:5] <- f2[,2:5]/1000
-
-colnames(f2) <- c("PII","GRIN 2007","GRIN GLOBAL 2017","IRRI IMP DATA"," IRRI FINAL COORDS")
+colnames(f2) <- c("PII","GRIN 2007","GRIN GLOBAL 2017","IRRI IMP DATA","IRRI FINAL COORDS")
+f2 <- as.data.frame(f2); f2$IRRI_BY_HAND <- NA
+f2$IRRI_BY_HAND <- f2[,5]
+f2$IRRI_BY_HAND[which(file_to_fix$IRRI_BYHAND_FLAG==0)] <- NA
+colnames(f2) [6] <-"IRRI BY HAND"
+f2$`IRRI FINAL COORDS`[which(file_to_fix$IRRI_BYHAND_FLAG==1)] <- NA
 
 
 UNC_DATA  <-  melt(f2, id="PII") 
-UNC_DATA <- UNC_DATA[which(UNC_DATA$X2!="PII"),]
+#UNC_DATA <- UNC_DATA[which(UNC_DATA$X2!="PII"),]
 colnames(UNC_DATA) <- c("ID","DATASET","VALUE")
 ###
 
-p1 <- ggplot(data=UNC_DATA,aes(x=VALUE,fill=DATASET,colour=DATASET))+
+p1 <- ggplot(data=UNC_DATA,aes(x=VALUE,fill=DATASET))+
   geom_histogram(aes(y=..density..), alpha=0.5, 
                  position="identity")+
   geom_density(alpha = 0.1)+
   xlim(c(0,100))+
   ylab("Density")+ xlab("Uncertainty (km)")+
-  ggtitle("Georeferencing uncertainty (NO EXCLUSIONS)")+
+  ggtitle("Wieczorek uncertainty")+
   theme(panel.background = element_rect(fill = "gray95"),
         text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
         axis.text.y  = element_text(size=40,colour="black"),
         legend.title=element_blank())#+
-
+p1 <- p1 + scale_fill_grey()
 ####  
 p1a <- ggplot(data=UNC_DATA,aes(x=DATASET,y=VALUE))+
   geom_boxplot(aes(fill=DATASET),outlier.size=NA) +
@@ -44,13 +48,13 @@ p1a <- ggplot(data=UNC_DATA,aes(x=DATASET,y=VALUE))+
   guides(fill=FALSE)+
   ylim(c(0,40))+
   ylab("Uncertainty (km)")+ xlab("")+
-  ggtitle("Georeferencing uncertainty Status (NO EXCLUSIONS)")+
+  ggtitle("Wieczorek uncertainty")+
   theme(panel.background = element_rect(fill = "gray95"),
         text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
         axis.text.y  = element_text(size=40,colour="black"),
         legend.title=element_blank(),legend.position="none")#+
 
-
+p1a <- p1a + scale_fill_grey()
 
 
 #########################################################
@@ -74,39 +78,43 @@ for(i in 1:nrow(file_to_fix)){
     f3[i,3] <- NA
     f3[i,4] <- NA
     #f3[i,5] <- NA
+    f3[i,6] <- NA
     
   } else  if(file_to_fix$LOCALITY_FLAG[[i]]==1){
     f3[i,2] <- NA
     f3[i,3] <- NA
     f3[i,4] <- NA
     f3[i,5] <- NA
+    f3[i,6] <- NA
     
   } else  if(file_to_fix$SOS_FLAG[[i]]==1){
     f3[i,2] <- NA
     f3[i,3] <- NA
     f3[i,4] <- NA
     f3[i,5] <- NA
+    f3[i,6] <- NA
     
   } else  if(file_to_fix$GG_COORDS_FLAG[[i]]==1){
     f3[i,2] <- NA
    # f3[i,3] <- NA
     f3[i,4] <- NA
     f3[i,5] <- NA
+    f3[i,6] <- NA
     
-  } else  if(file_to_fix$HIJ_FLAG[[i]]==1){
+  } else  if(file_to_fix$IRRI_LOCALITY_FLAG[[i]]==1){
     f3[i,5] <- NA
-  }
-  
+    f3[i,6] <- NA
+  }else  if(file_to_fix$IRRI_BYHAND_FLAG[[i]]==1){
+    f3[i,5] <- NA
+    f3[i,6] <- NA
+    }
 }
 
-
-
-UNC_DATA2 <-  melt(f3, id="PII") 
-UNC_DATA2 <- UNC_DATA2[which(UNC_DATA2$X2!="PII"),]
+UNC_DATA2  <-  melt(f3, id="PII") 
 colnames(UNC_DATA2) <- c("ID","DATASET","VALUE")
 ###
 
-p2 <- ggplot(data=UNC_DATA2,aes(x=VALUE,fill=DATASET,colour=DATASET))+
+p2 <- ggplot(data=UNC_DATA2,aes(x=VALUE,fill=DATASET))+
   geom_histogram(aes(y=..density..), alpha=0.5, 
                  position="identity")+
   geom_density(alpha = 0.1)+
@@ -116,7 +124,8 @@ p2 <- ggplot(data=UNC_DATA2,aes(x=VALUE,fill=DATASET,colour=DATASET))+
   theme(panel.background = element_rect(fill = "gray95"),
         text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
         axis.text.y  = element_text(size=40,colour="black"),
-        legend.title=element_blank())#+
+        legend.title=element_blank())
+  p2 <- p2 + scale_fill_grey()#+
 
 
 ####  
@@ -133,7 +142,7 @@ p2a <- ggplot(data=UNC_DATA2,aes(x=DATASET,y=VALUE))+
         text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
         axis.text.y  = element_text(size=40,colour="black"),
         legend.title=element_blank(),legend.position="none")#+
-
+p2a <- p2a + scale_fill_grey()
 ggsave(paste0(out_dir,"/","UNC_ALL_DENS",".pdf"),p1,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 ggsave(paste0(out_dir,"/","UNC_EXC_DENS",".pdf"),p2,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
 ggsave(paste0(out_dir,"/","UNC_ALL_BP",".pdf"),p1a,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)

@@ -424,13 +424,19 @@ for(i in 1:nrow(file_to_fix)){
   }
 }
 
-
+# for(i in 1:length(SCOORD)){
+#   cat("list n | row: ",i,"\n")
+#   SCOORD[[i]][which(file_to_fix$GG_COORDS_FLAG[[i]] ==1)] <- "BLUE"
+#   
+# }
 
 S1 <- as.data.frame(unlist(S1))
 SCOORD <- as.data.frame(unlist(SCOORD))
 
 UNCER <- cbind(AC_ID,S1,SCOORD)
 colnames(UNCER) <- c("DUMMY","ACID","PII","TRAFFIC_LIGHT","SUGGESTED COORD")
-
-
-write.table(UNCER,paste0(out_dir,"/","UNCERTAINTIES_MIN.csv"),sep="|",quote = F,row.names = F, na = "")
+UNCER$TRAFFIC_LIGHT <- as.character(UNCER$TRAFFIC_LIGHT)
+UNCER$TRAFFIC_LIGHT[which(file_to_fix$IRRI_BYHAND_FLAG==1)] <- "DARK GREEN"
+UNCER$TRAFFIC_LIGHT[which(file_to_fix$GG_COORDS_FLAG==1)] <- "BLUE"
+UNCER$TRAFFIC_LIGHT[which(file_to_fix$SOS_FLAG==1)] <- "PURPLE"
+write.table(UNCER,paste0(out_dir,"/","UNCERTAINTIES_MAX.csv"),sep="|",quote = F,row.names = F, na = "")

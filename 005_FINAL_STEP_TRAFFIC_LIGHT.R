@@ -1,6 +1,7 @@
-options(java.home="C:\\Program Files\\Java\\jre1.8.0_141")
+#options(java.home="C:\\Program Files\\Java\\jre1.8.0_141")#
+#options(java.home="C:/Program Files (x86)/Java/jre1.8.0_171")#
 
-require(xlsx);require(rJava)
+#require(xlsx);#require(rJava)
 
 file_to_fix <- read.csv("E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/COORDS.csv",sep="|",header=TRUE)
 out_dir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV"; if(!file.exists(out_dir)){dir.create(out_dir)}  
@@ -42,18 +43,17 @@ for(i in 1:nrow(file_to_fix)){
     AC_ID$TRAFFIC_LIGHT[[i]] <- "PURPLE"
     AC_ID$COMMENTS[[i]] <- "SOS ACCESION (EXCLUDED)"
   } else {
-  
   #FALTA#
 
   ###GEOREFERENCED BY HAND AVAILABLE###
 
-  if(file_to_fix$georefremarks[[i]]==1 &
+  if(file_to_fix$IRRI_BYHAND_FLAG[[i]]==1 &
      file_to_fix$IRRI_LOCALITY_FLAG[[i]]==0 
      ){
-    AC_ID$TRAFFIC_LIGHT[[i]] <- "GREEN"
+    AC_ID$TRAFFIC_LIGHT[[i]] <- "DARK GREEN"
     AC_ID$COMMENTS[[i]] <- "ACCESION GEOREFERENCED BY HAND" 
     
-  } else  if(file_to_fix$georefremarks[[i]]==1 & file_to_fix$IRRI_LOCALITY_FLAG[[i]]==1){
+  } else  if(file_to_fix$IRRI_BYHAND_FLAG[[i]]==1 & file_to_fix$IRRI_LOCALITY_FLAG[[i]]==1){
   AC_ID$TRAFFIC_LIGHT[[i]] <- "RED"
   AC_ID$COMMENTS[[i]] <- "NOT LOCALITY GEOREFERENCED BY HAND" 
 } else  if(file_to_fix$LOCALITY_FLAG[[i]]==1){
@@ -63,6 +63,7 @@ for(i in 1:nrow(file_to_fix)){
   
          
    XX <- cbind(AC_ID$THR[[i]],AC_ID$UNC[[i]]) 
+   
   if(XX[1]=="RED" & XX[2]=="RED"){
     AC_ID$TRAFFIC_LIGHT[[i]] <- "RED"
   AC_ID$COMMENTS[[i]] <- "BOTH TRAFFIC LIGHTS WERE RED"
@@ -72,9 +73,7 @@ for(i in 1:nrow(file_to_fix)){
   } else  if(XX[1]=="RED" & XX[2]=="GREEN"){
     AC_ID$TRAFFIC_LIGHT[[i]] <- "RED"
     AC_ID$COMMENTS[[i]] <- "CHECK THRESHOLDS"
-  }
-
-    else if(XX[1]=="YELLOW" & XX[2]=="RED"){
+  } else if(XX[1]=="YELLOW" & XX[2]=="RED"){
       AC_ID$TRAFFIC_LIGHT[[i]] <- "RED"
     AC_ID$COMMENTS[[i]] <- "CHECK UNCERTAINTY"
   } else  if(XX[1]=="YELLOW" & XX[2]=="YELLOW"){
@@ -83,9 +82,7 @@ for(i in 1:nrow(file_to_fix)){
   } else  if(XX[1]=="YELLOW" & XX[2]=="GREEN"){
     AC_ID$TRAFFIC_LIGHT[[i]] <- "YELLOW"
     AC_ID$COMMENTS[[i]] <- "CHECK THRESHOLDS (YELLOW)"
-  }
-
-   else if(XX[1]=="GREEN" & XX[2]=="RED"){
+  } else if(XX[1]=="GREEN" & XX[2]=="RED"){
      AC_ID$TRAFFIC_LIGHT[[i]] <- "RED"
     AC_ID$COMMENTS[[i]] <- "CHECK UNCERTAINTY"
   } else  if(XX[1]=="GREEN" & XX[2]=="YELLOW"){
@@ -94,18 +91,28 @@ for(i in 1:nrow(file_to_fix)){
   } else  if(XX[1]=="GREEN" & XX[2]=="GREEN"){
     AC_ID$TRAFFIC_LIGHT[[i]] <- "GREEN"
     AC_ID$COMMENTS[[i]] <- "PERFECT MATCH"
-    }
-  }
+  } else if(XX[1]=="GREEN" & XX[2]=="BLUE"){
+     AC_ID$TRAFFIC_LIGHT[[i]] <- "BLUE"
+     AC_ID$COMMENTS[[i]] <- "INFORMATION FOUND IN GRIN GLOBAL (GOOD FIT IN THRESHOLD, CHECK WITH ISO FLAG)"
+   } else if(XX[1]=="GREEN" & XX[2]=="DARK GREEN"){
+     AC_ID$TRAFFIC_LIGHT[[i]] <- "DARK GREEN"
+     AC_ID$COMMENTS[[i]] <- "ACCESION GEOREFERENCED BY HAND (GOOD THRESHOLD PERFORMANCE)"
+   } else  if(XX[1]=="RED" & XX[2]=="DARK GREEN"){
+     AC_ID$TRAFFIC_LIGHT[[i]] <- "DARK GREEN"
+     AC_ID$COMMENTS[[i]] <- "ACCESION GEOREFERENCED BY HAND (BAD THRESHOLD PERFORMANCE)"
+   } else  if(XX[1]=="RED" & XX[2]=="BLUE"){
+     AC_ID$TRAFFIC_LIGHT[[i]] <- "BLUE"
+     AC_ID$COMMENTS[[i]] <- "INFORMATION FOUND IN GRIN GLOBAL (CHECK WITH ISO FLAG AND THRESHOLD)"
+   }
+   
+}
  
-  
-  ###SOS###
-  
- 
+     
   
   ###GRIN GLOBAL COORDS AVAILABLE###
   
   if(file_to_fix$GG_COORDS_FLAG[[i]]==1 & file_to_fix$LOCALITY_FLAG[[i]]==0){
-    AC_ID$TRAFFIC_LIGHT[[i]] <- "GREEN"
+    AC_ID$TRAFFIC_LIGHT[[i]] <- "BLUE"
     AC_ID$COMMENTS[[i]] <- "INFORMATION FOUND IN GRIN GLOBAL (CHECK WITH ISO FLAG)"
     }
   }  
@@ -129,10 +136,39 @@ for(i in 1:nrow(file_to_fix)){
   if(AC_ID$SCOORD[[i]]=="NO COORD SUGGESTED"){
     AC_ID$COMMENTS[[i]] <- "NO COORD SUGGESTED"
   } 
-}   
-# }
-# 
-# 
+  
+  
+
+  
+} 
+
+
+for(i in 1:nrow(AC_ID)){
+  cat("SECOND ROUND | ROW:" ,i,"\n")
+  
+if(AC_ID$THR[[i]]=="DARK GREEN" & AC_ID$UNC[[i]]=="DARK GREEN"){
+  AC_ID$TRAFFIC_LIGHT[[i]] <- "DARK GREEN" 
+  AC_ID$SCOORD[[i]]<- "GEOREF BY HAND"
+  AC_ID$COMMENTS[[i]] <- "NO COORD SUGGESTED"
+} 
+  if(AC_ID$THR[[i]]=="BLUE" & AC_ID$UNC[[i]]=="BLUE"){
+  AC_ID$TRAFFIC_LIGHT[[i]] <- "BLUE"  
+  AC_ID$SCOORD[[i]] <- "UPLOADED IN GRIN GLOBAL"
+  AC_ID$COMMENTS[[i]] <- "NO COORD SUGGESTED"
+  }
+}
+
+for(i in 1:nrow(AC_ID)){
+#  cat("THIRD ROUND | ROW:" ,i,"\n")
+  if(AC_ID$THR[[i]]=="PURPLE" & AC_ID$UNC[[i]]=="BLUE"){
+    cat("Applied to: ",i,"\n")
+    AC_ID$TRAFFIC_LIGHT[[i]] <- "PURPLE"
+    AC_ID$SCOORD[[i]] <- "SOS RECORD UPLOADED IN GRIN GLOBAL"
+    AC_ID$COMMENTS[[i]] <- "SOS UPLOADED IN GRIN GLOBAL (NO COORD SUGGESTED)"
+  }else{
+    cat("skip: ",i,"\n")
+  }
+}
 # 
 #   
 #   
@@ -142,7 +178,7 @@ final_out <- merge(file_to_fix,AC_ID,by ="ACID")
 final_out <- final_out[,-c(59,60)]
 
 #tapply(final_out$TRAFFIC_LIGHT.y,final_out$TRAFFIC_LIGHT.y,length)
-
+#i <- 28768
 out_dir_outcome <- paste0(out_dir,"/","OUTCOME"); if(!file.exists(out_dir_outcome)){dir.create(out_dir_outcome)}  
 write.table(final_out,paste0(out_dir_outcome,"/","COORDS_FINAL",".csv"),sep="|",row.names=F,na="");gc()
 

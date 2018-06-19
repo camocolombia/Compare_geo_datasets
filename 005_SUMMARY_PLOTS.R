@@ -20,10 +20,10 @@ colnames(file3) <- c("Accession ID"," GRIN 2007","GRIN GLOBAL 2017","IRRI IMP DA
 file3_DATA <-  melt(file3, id="Accession ID")  # convert to long format
 #file3_DATA$value <- factor(file3_DATA$value,unique(file3_DATA$value))
 file3_DATA  <-  file3_DATA[which(file3_DATA$variable=="TRAFFIC_LIGHT"),]
-file3_DATA$value <- factor(file3_DATA$value, levels = c("RED", "YELLOW", "GREEN"))
-file3_DATA <- file3_DATA[order(file3_DATA$value== "RED",
+file3_DATA$value <- factor(file3_DATA$value, levels = c("GREEN", "YELLOW", "RED"))
+file3_DATA <- file3_DATA[order(file3_DATA$value== "GREEN",
                              file3_DATA$value== "YELLOW",
-                             file3_DATA$value== "GREEN",
+                             file3_DATA$value== "RED",
                              decreasing = T),]
 
 #TRAFFIC_LIGHT FOR ISO2
@@ -38,7 +38,7 @@ ISO2_PLOT <-  ggplot(file3_DATA, aes(value))+
   #scale_fill_manual(name="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
   #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
 
-  scale_fill_manual("legend", values = c("red","yellow","green"))+
+  scale_fill_manual("legend", values = c("green","yellow","red"))+
   theme(panel.background = element_rect(fill = "gray95"),
         text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
         axis.text.y  = element_text(size=49,colour="black"),
@@ -56,11 +56,13 @@ ISO2_PLOT <-  ggplot(file3_DATA, aes(value))+
 THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
  colnames(THR) <- c("Accession id","value")
  THR <- THR[which(THR$value!=""),]
- THR$value <- factor(THR$value, levels = c("PURPLE","RED", "YELLOW", "GREEN"))
- THR <- THR[order(THR$value== "PURPLE",
-                  THR$value== "RED",
-                  THR$value== "YELLOW",
+ THR$value <- factor(THR$value, levels = c("DARK GREEN","BLUE","PURPLE","GREEN","YELLOW","RED"))
+ THR <- THR[order(THR$value== "DARK GREEN",
+                  THR$value== "BLUE",
+                  THR$value== "PURPLE",
                   THR$value== "GREEN",
+                  THR$value== "YELLOW",
+                  THR$value== "RED",
                                 decreasing = T),]
  
 # THR <- THR[which(!is.na(THR$value)),]
@@ -73,11 +75,11 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
    geom_bar(aes(fill = value))+
    guides(fill=FALSE)+
    ylab("Number of occurrences")+ xlab("Traffic light")+
-   ggtitle("Threshold traffic light counts")+
+   ggtitle("Geographical distances traffic light")+
    #scale_fill_manual(nameThre="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
    #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
    
-   scale_fill_manual("legend", values = c("purple","red","yellow","green"))+
+   scale_fill_manual("legend", values = c("darkgreen","blue","purple","green","yellow","red"))+
    theme(panel.background = element_rect(fill = "gray95"),
          text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
          axis.text.y  = element_text(size=49,colour="black"),
@@ -93,12 +95,16 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
  UNC <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$UNC.y)))
  colnames(UNC) <- c("Accession id","value")
  UNC <- UNC[which(UNC$value!=""),]
- UNC$value <- factor(UNC$value, levels = c("PURPLE","RED", "YELLOW", "GREEN"))
- UNC <- UNC[order(UNC$value== "PURPLE",
-                  UNC$value== "RED",
-                  UNC$value== "YELLOW",
+ 
+ UNC$value <- factor(UNC$value, levels = c("DARK GREEN","BLUE","PURPLE","GREEN","YELLOW","RED"))
+ UNC <- UNC[order(UNC$value== "DARK GREEN",
+                  UNC$value== "BLUE",
+                  UNC$value== "PURPLE",
                   UNC$value== "GREEN",
+                  UNC$value== "YELLOW",
+                  UNC$value== "RED",
                   decreasing = T),]
+
  
  # THR <- THR[which(!is.na(THR$value)),]
  
@@ -114,7 +120,7 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
    #scale_fill_manual(name="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
    #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
    
-   scale_fill_manual("legend", values = c("purple","red","yellow","green"))+
+   scale_fill_manual("legend", values = c("darkgreen","blue","purple","green","yellow","red"))+
    theme(panel.background = element_rect(fill = "gray95"),
          text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
          axis.text.y  = element_text(size=49,colour="black"),
@@ -138,14 +144,17 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
               "BY HAND", value2,fixed = T)
  
 
- TRAFFIC$value <- factor(value2, levels = c("PURPLE","RED", "YELLOW", "GREEN","BY HAND"))
- TRAFFIC <- TRAFFIC[order(TRAFFIC$value== "PURPLE",
-                  TRAFFIC$value== "RED",
-                  TRAFFIC$value== "YELLOW",
-                  TRAFFIC$value== "GREEN",
-                  TRAFFIC$value== "BY HAND",
+ 
+ TRAFFIC$value <- factor(TRAFFIC$value, levels = c("DARK GREEN","BLUE","PURPLE","GREEN","YELLOW","RED"))
+ TRAFFIC <- TRAFFIC[order(TRAFFIC$value== "DARK GREEN",
+                          TRAFFIC$value== "BLUE",
+                          TRAFFIC$value== "PURPLE",
+                          TRAFFIC$value== "GREEN",
+                          TRAFFIC$value== "YELLOW",
+                          TRAFFIC$value== "RED",
                   decreasing = T),]
  
+
  # THR <- THR[which(!is.na(THR$value)),]
 tapply(TRAFFIC$value,TRAFFIC$value,length)
  
@@ -160,7 +169,7 @@ tapply(TRAFFIC$value,TRAFFIC$value,length)
    #scale_fill_manual(name="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
    #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
    
-   scale_fill_manual("legend", values = c("purple","red","yellow","green","blue"))+
+   scale_fill_manual("legend", values = c("darkgreen","blue","purple","green","yellow","red"))+
    theme(panel.background = element_rect(fill = "gray95"),
          text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
          axis.text.y  = element_text(size=49,colour="black"),
@@ -181,6 +190,7 @@ tapply(TRAFFIC$value,TRAFFIC$value,length)
    "NO COORD",
    "NO LOCALITY",
    "SOS",
+   "SOS RECORD UPLOADED IN GRIN GLOBAL",
    "CENTROID",
    "UPLOADED IN GRIN GLOBAL",
    "GRIN 2007", 
@@ -197,6 +207,7 @@ tapply(TRAFFIC$value,TRAFFIC$value,length)
    SUG_coords$value==  "NO COORD",
    SUG_coords$value==    "NO LOCALITY",
    SUG_coords$value==    "SOS",
+   SUG_coords$value==    "SOS RECORD UPLOADED IN GRIN GLOBAL",
    SUG_coords$value==    "CENTROID",
    SUG_coords$value==    "UPLOADED IN GRIN GLOBAL",
    SUG_coords$value==    "GRIN 2007", 
@@ -231,7 +242,8 @@ tapply(TRAFFIC$value,TRAFFIC$value,length)
          axis.text.y  = element_text(size=49,colour="black"),
          legend.title=element_blank())
  #scale_colour_discrete(c("red","yellow","green"))
- 
- ggsave(paste0(out_dir_outcome,"/","SUG_PLOT",".pdf"),SUG_coords_PLOT,dpi=600,width =90,height=34.395,units = "cm",scale=1.2,limitsize = FALSE)
+ SUG_coords_PLOT <- SUG_coords_PLOT + scale_fill_grey()
+
+ ggsave(paste0(out_dir_outcome,"/","SUG_PLOT",".pdf"),SUG_coords_PLOT,dpi=600,width =90,height=60,units = "cm",scale=1.2,limitsize = FALSE)
  
  

@@ -355,5 +355,19 @@ THR_METRICS$COORD_STATUS[which(THR_METRICS$COORD_STATUS==20)] <- "GEOREF BY HAND
 THR_METRICS$COORD_STATUS[which(THR_METRICS$COORD_STATUS==30)] <- "GRIN GLOBAL"
 THR_METRICS$COORD_STATUS[which(THR_METRICS$COORD_STATUS==40)] <- "NO LOCALITY (CENTROID)"
 
+THR_METRICS$TRAFFIC_LIGHT[which(file_to_fix$IRRI_BYHAND_FLAG==1 &
+                                file_to_fix$SOS_FLAG==0 &
+                                  file_to_fix$LOCALITY_FLAG==0)] <- "DARK GREEN"
+
+THR_METRICS$TRAFFIC_LIGHT[which(file_to_fix$GG_COORDS_FLAG==1 &
+                                   file_to_fix$SOS_FLAG==0 
+                                  # file_to_fix$LOCALITY_FLAG==0
+                                  )] <- "BLUE"
+
+THR_METRICS$TRAFFIC_LIGHT[which(file_to_fix$GG_COORDS_FLAG==0 &
+                                  file_to_fix$SOS_FLAG==1
+                                # file_to_fix$LOCALITY_FLAG==0
+)] <- "PURPLE"
+
 write.table(THR_METRICS,paste0(inDir,"/","THR_METRICS_2.csv"),row.names = F,sep="|")
   
