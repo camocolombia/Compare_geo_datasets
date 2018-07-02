@@ -56,10 +56,10 @@ ISO2_PLOT <-  ggplot(file3_DATA, aes(value))+
 THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
  colnames(THR) <- c("Accession id","value")
  THR <- THR[which(THR$value!=""),]
- THR$value <- factor(THR$value, levels = c("DARK GREEN","BLUE","PURPLE","GREEN","YELLOW","RED"))
- THR <- THR[order(THR$value== "DARK GREEN",
-                  THR$value== "BLUE",
+ THR$value <- factor(THR$value, levels = c("BLUE","PURPLE","DARK GREEN","GREEN","YELLOW","RED"))
+ THR <- THR[order(THR$value== "BLUE",
                   THR$value== "PURPLE",
+                  THR$value== "DARK GREEN",
                   THR$value== "GREEN",
                   THR$value== "YELLOW",
                   THR$value== "RED",
@@ -79,7 +79,7 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
    #scale_fill_manual(nameThre="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
    #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
    
-   scale_fill_manual("legend", values = c("darkgreen","blue","purple","green","yellow","red"))+
+   scale_fill_manual("legend", values = c("blue","purple","darkgreen","green","yellow","red"))+
    theme(panel.background = element_rect(fill = "gray95"),
          text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
          axis.text.y  = element_text(size=49,colour="black"),
@@ -96,10 +96,10 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
  colnames(UNC) <- c("Accession id","value")
  UNC <- UNC[which(UNC$value!=""),]
  
- UNC$value <- factor(UNC$value, levels = c("DARK GREEN","BLUE","PURPLE","GREEN","YELLOW","RED"))
- UNC <- UNC[order(UNC$value== "DARK GREEN",
-                  UNC$value== "BLUE",
+ UNC$value <- factor(UNC$value, levels = c("BLUE","PURPLE","DARK GREEN","GREEN","YELLOW","RED"))
+ UNC <- UNC[order(UNC$value== "BLUE",
                   UNC$value== "PURPLE",
+                  UNC$value== "DARK GREEN",
                   UNC$value== "GREEN",
                   UNC$value== "YELLOW",
                   UNC$value== "RED",
@@ -120,7 +120,7 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
    #scale_fill_manual(name="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
    #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
    
-   scale_fill_manual("legend", values = c("darkgreen","blue","purple","green","yellow","red"))+
+   scale_fill_manual("legend", values = c("blue","purple","darkgreen","green","yellow","red"))+
    theme(panel.background = element_rect(fill = "gray95"),
          text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
          axis.text.y  = element_text(size=49,colour="black"),
@@ -145,10 +145,10 @@ THR <-  as.data.frame(cbind(file_ready$ACID,as.character(file_ready$THR.y)))
  
 
  
- TRAFFIC$value <- factor(TRAFFIC$value, levels = c("DARK GREEN","BLUE","PURPLE","GREEN","YELLOW","RED"))
- TRAFFIC <- TRAFFIC[order(TRAFFIC$value== "DARK GREEN",
-                          TRAFFIC$value== "BLUE",
+ TRAFFIC$value <- factor(TRAFFIC$value, levels = c("BLUE","PURPLE","DARK GREEN","GREEN","YELLOW","RED"))
+ TRAFFIC <- TRAFFIC[order(TRAFFIC$value== "BLUE",
                           TRAFFIC$value== "PURPLE",
+                          TRAFFIC$value== "DARK GREEN",
                           TRAFFIC$value== "GREEN",
                           TRAFFIC$value== "YELLOW",
                           TRAFFIC$value== "RED",
@@ -169,7 +169,7 @@ tapply(TRAFFIC$value,TRAFFIC$value,length)
    #scale_fill_manual(name="Traffic\n light",labels = c("Red","Yellow","Green"),values = c("red","yellow","green"))+
    #scale_fill_manual("legend", values = c("RED" = "red", "YELLOW" = "yellow", "GREEN" = "green"))+
    
-   scale_fill_manual("legend", values = c("darkgreen","blue","purple","green","yellow","red"))+
+   scale_fill_manual("legend", values = c("blue","purple","darkgreen","green","yellow","red"))+
    theme(panel.background = element_rect(fill = "gray95"),
          text=element_text(size=40),axis.text.x  = element_text(size=40,colour="black",angle = 90, hjust = 1),
          axis.text.y  = element_text(size=49,colour="black"),
