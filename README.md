@@ -22,5 +22,3 @@ Workflow followed to perform the analysis
 14.)	Do an Excel file copy and join with the traffic lights file named COORDS_FINAL.csv using a VLOOKUP or just copy and paste. Please check out the file before performing the join. In some cases, the file is altered in the last 10 rows.
 15.)	Run the 005_SUMMARY_PLOTS.R to get summary plots.
 16.)	Use the final Excel file to organize data to map coordinates.
-
-
