@@ -2,9 +2,10 @@
 #options(java.home="C:/Program Files (x86)/Java/jre1.8.0_171")#
 
 #require(xlsx);#require(rJava)
+require(tidyverse)
 
-file_to_fix <- read.csv("E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/COORDS.csv",sep="|",header=TRUE)
-out_dir <- "E:/Dropbox/Dropbox/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV"; if(!file.exists(out_dir)){dir.create(out_dir)}  
+file_to_fix <- read.csv("D:/DATA/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV/COORDS.csv",sep="|",header=TRUE)
+out_dir <- "D:/DATA/NPGS georeferencing project/DATASET_FINAL/WORKSPACE/CSV"; if(!file.exists(out_dir)){dir.create(out_dir)}  
 
 ####THRESHOLD TL####
 
@@ -174,8 +175,13 @@ for(i in 1:nrow(AC_ID)){
 #   
 #   
 # }
-final_out <- merge(file_to_fix,AC_ID,by ="ACID")
-final_out <- final_out[,-c(59,60)]
+#final_out <- merge(file_to_fix,AC_ID,by ="ACID")
+file_to_fix2 <- file_to_fix
+final_out <- full_join(file_to_fix,AC_ID,by ="ACID")
+
+colnames(final_out)
+final_out <- final_out[,-c(61:68)]
+#final_out <- final_out[,-c(59,60)]
 
 #tapply(final_out$TRAFFIC_LIGHT.y,final_out$TRAFFIC_LIGHT.y,length)
 #i <- 28768
